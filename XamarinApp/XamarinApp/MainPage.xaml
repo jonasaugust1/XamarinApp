@@ -8,17 +8,22 @@
             <DataTemplate>
                 <ViewCell>
                     <ViewCell.View>
-                        <Label>
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <FormattedString.Spans>
-                                        <Span Text="{Binding Nome}"></Span>
-                                        <Span Text=" - "></Span>
-                                        <Span Text="{Binding Preco}"></Span>
-                                    </FormattedString.Spans>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
+                        <StackLayout Orientation="Horizontal">
+                            <Label 
+                                Text="{Binding Nome}" 
+                                FontSize="20" 
+                                VerticalTextAlignment="Center">
+                            </Label>
+                            <Label 
+                                Text=" - "
+                                VerticalTextAlignment="Center">
+                                
+                            </Label>
+                            <Label 
+                                Text="{Binding Preco}"
+                                VerticalTextAlignment="Center">
+                            </Label>
+                        </StackLayout>
                     </ViewCell.View>
                 </ViewCell>
             </DataTemplate>
