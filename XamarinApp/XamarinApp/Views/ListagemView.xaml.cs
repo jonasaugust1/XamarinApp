@@ -38,7 +38,7 @@ namespace XamarinApp.View
         {
             Veiculo veiculo = (Veiculo)e.Item;
 
-            Navigation.PushAsync(new DetalhesView());
+            Navigation.PushAsync(new DetalhesView(veiculo));
         }
     }
 }
