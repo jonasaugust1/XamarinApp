@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using Xamarin.Forms;
 using XamarinApp.Models;
+using XamarinApp.Views;
 
-namespace XamarinApp
+namespace XamarinApp.View
 {
-    public partial class MainPage : ContentPage
+    public partial class ListagemView : ContentPage
     {
         public List<Veiculo> Veiculos { get; set; }
-        public MainPage()
+        public ListagemView()
         {
             InitializeComponent();
 
@@ -37,7 +38,7 @@ namespace XamarinApp
         {
             Veiculo veiculo = (Veiculo)e.Item;
 
-            DisplayAlert("Test Drive", $"Veículo selecionado {veiculo.Nome}, valor {veiculo.PrecoFormatado}", "Ok");
+            Navigation.PushAsync(new DetalhesView());
         }
     }
 }
