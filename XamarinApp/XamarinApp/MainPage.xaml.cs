@@ -32,5 +32,12 @@ namespace XamarinApp
 
             BindingContext = this;
         }
+
+        private void ListViewVeiculos_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            Veiculo veiculo = (Veiculo)e.Item;
+
+            DisplayAlert("Test Drive", $"Veículo selecionado {veiculo.Nome}, valor {veiculo.PrecoFormatado}", "Ok");
+        }
     }
 }

@@ -3,7 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XamarinApp.MainPage">
 
-    <ListView x:Name="listViewVeiculos" ItemsSource="{Binding Veiculos}">
+    <ListView 
+        x:Name="ListViewVeiculos" 
+        ItemsSource="{Binding Veiculos}"
+        Margin="25"
+        ItemTapped="listViewVeiculos_ItemTapped">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
@@ -20,7 +24,7 @@
                                 
                             </Label>
                             <Label 
-                                Text="{Binding Preco}"
+                                Text="{Binding PrecoFormatado}"
                                 VerticalTextAlignment="Center">
                             </Label>
                         </StackLayout>
