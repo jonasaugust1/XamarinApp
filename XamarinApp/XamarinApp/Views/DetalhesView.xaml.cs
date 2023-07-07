@@ -30,47 +30,41 @@ namespace XamarinApp.Views
                 return $"Dispositivo multimídia R$ {Veiculo.DISPOSITIVO_MULTIMIDIA}";
             }
         }
-
-        bool _TemFreioABS;
         public bool TemFreioABS 
         { 
             get
             {
-                return _TemFreioABS;
+                return Veiculo.TemFreioABS;
             }
             set
             {
-                _TemFreioABS = value;
+                Veiculo.TemFreioABS = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(ValorTotal));
             }
         }
-
-        bool _TemArCondicionado;
         public bool TemArCondicionado 
         { 
             get
             {
-                return _TemArCondicionado;
+                return Veiculo.TemArCondicionado;
             }
             set
             {
-                _TemArCondicionado = value;
+                Veiculo.TemArCondicionado = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(ValorTotal));
             }
         }
-
-        bool _TemDispositivoMultimidia;
         public bool TemDispositivoMultimidia
         { 
             get
             {
-                return _TemDispositivoMultimidia;
+                return Veiculo.TemDispositivoMultimidia;
             }
             set
             {
-                _TemDispositivoMultimidia = value;
+                Veiculo.TemDispositivoMultimidia = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(ValorTotal));
             } 
@@ -79,15 +73,7 @@ namespace XamarinApp.Views
         {
             get
             {
-                decimal valorTotal = Veiculo.Preco;
-
-                valorTotal += TemFreioABS ? Veiculo.FREIO_ABS : 0;
-
-                valorTotal += TemArCondicionado ? Veiculo.AR_CONDICIONADO : 0;
-
-                valorTotal += TemDispositivoMultimidia ? Veiculo.DISPOSITIVO_MULTIMIDIA : 0;
-
-                return $"Total: {valorTotal.ToString("C2", CultureInfo.CurrentCulture)}";
+                return Veiculo.ValorTotal;
             }
         }
 

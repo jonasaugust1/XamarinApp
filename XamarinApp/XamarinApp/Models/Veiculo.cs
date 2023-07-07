@@ -16,5 +16,23 @@ namespace XamarinApp.Models
                 return Preco.ToString("C2", CultureInfo.CurrentCulture);
             }
         }
+        public bool TemFreioABS { get; set; }
+        public bool TemArCondicionado { get; set; }
+        public bool TemDispositivoMultimidia { get; set; }
+        public string ValorTotal
+        {
+            get
+            {
+                decimal valorTotal = Preco;
+
+                valorTotal += TemFreioABS ? FREIO_ABS : 0;
+
+                valorTotal += TemArCondicionado ? AR_CONDICIONADO : 0;
+
+                valorTotal += TemDispositivoMultimidia ? DISPOSITIVO_MULTIMIDIA : 0;
+
+                return $"Total: {valorTotal.ToString("C2", CultureInfo.CurrentCulture)}";
+            }
+        }
     }
 }

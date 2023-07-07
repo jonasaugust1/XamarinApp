@@ -8,51 +8,88 @@ namespace XamarinApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AgendamentoView : ContentPage
     {
-        public Veiculo Veiculo { get; set; }
-        public string Nome { get; set; }
-        public string Telefone { get; set; }
-        public string Email { get; set; }
-
-        DateTime _Data;
+        public Agendamento Agendamento { get; set; }
+        public Veiculo Veiculo 
+        { 
+            get
+            {
+                return Agendamento.Veiculo;
+            }
+            set
+            {
+                Agendamento.Veiculo = value;
+            }
+        }
+        public string Nome
+        {
+            get
+            {
+                return Agendamento.Nome;
+            }
+            set
+            {
+                Agendamento.Nome = value;
+            }
+        }
+        public string Telefone
+        {
+            get
+            {
+                return Agendamento.Telefone;
+            }
+            set
+            {
+                Agendamento.Telefone = value;
+            }
+        }
+        public string Email
+        {
+            get
+            {
+                return Agendamento.Email;
+            }
+            set
+            {
+                Agendamento.Email = value;
+            }
+        }
         public DateTime Data
         {
             get
             {
-                return _Data;
+                return Agendamento.DataAgendamento;
             }
             set
             {
-                _Data = value;
-                OnPropertyChanged();
+                Agendamento.DataAgendamento = value;
             }
         }
-
         public DateTime DataMinima
         {
             get
             {
-                return DateTime.Now;
+                return Agendamento.DataMinimaAgendamento;
             }
         }
-
-        TimeSpan _Hora;
         public TimeSpan Hora
         {
             get
             {
-                return _Hora;
+                return Agendamento.HoraAgendamento;
             }
             set
             {
-                _Hora = value;
-                OnPropertyChanged();
+                Agendamento.HoraAgendamento = value;
             }
         }
         public AgendamentoView(Veiculo veiculo)
         {
             InitializeComponent();
             Title = veiculo.Nome;
-            Veiculo = veiculo;
+            Agendamento = new Agendamento
+            {
+                Veiculo = veiculo
+            };
 
             BindingContext = this;
         }
@@ -64,7 +101,7 @@ $@"
 Nome: {Nome}
 Telefone: {Telefone}
 Email: {Email}
-Data: {Data.ToString("dd/MM/yyyy")}
+Data: {Data:dd/MM/yyyy}
 Hora: {Hora}
 Modelo: {Veiculo.Nome}", "Ok");
         }
