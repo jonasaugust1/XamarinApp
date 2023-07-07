@@ -8,29 +8,26 @@ namespace XamarinApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DetalhesView : ContentPage
     {
-        private const decimal FREIO_ABS = 800.00M;
-        private const decimal AR_CONDICIONADO = 1000.00M;
-        private const decimal DISPOSITIVO_MULTIMIDIA = 550.00M;
         public Veiculo Veiculo { get; set; }
         public string TextoFreioABS
         {
             get
             {
-                return $"Freio ABS R$ {FREIO_ABS}";
+                return $"Freio ABS R$ {Veiculo.FREIO_ABS}";
             }
         }
         public string TextoArCondicionado
         {
             get
             {
-                return $"Ar-condicionado R$ {AR_CONDICIONADO}";
+                return $"Ar-condicionado R$ {Veiculo.AR_CONDICIONADO}";
             }
         }
         public string TextoDispositivoMultimidia
         {
             get
             {
-                return $"Dispositivo multimídia R$ {DISPOSITIVO_MULTIMIDIA}";
+                return $"Dispositivo multimídia R$ {Veiculo.DISPOSITIVO_MULTIMIDIA}";
             }
         }
 
@@ -84,11 +81,11 @@ namespace XamarinApp.Views
             {
                 decimal valorTotal = Veiculo.Preco;
 
-                valorTotal += TemFreioABS ? FREIO_ABS : 0;
+                valorTotal += TemFreioABS ? Veiculo.FREIO_ABS : 0;
 
-                valorTotal += TemArCondicionado ? AR_CONDICIONADO : 0;
+                valorTotal += TemArCondicionado ? Veiculo.AR_CONDICIONADO : 0;
 
-                valorTotal += TemDispositivoMultimidia ? DISPOSITIVO_MULTIMIDIA : 0;
+                valorTotal += TemDispositivoMultimidia ? Veiculo.DISPOSITIVO_MULTIMIDIA : 0;
 
                 return $"Total: {valorTotal.ToString("C2", CultureInfo.CurrentCulture)}";
             }
