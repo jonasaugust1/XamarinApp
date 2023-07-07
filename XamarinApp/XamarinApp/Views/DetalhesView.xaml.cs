@@ -8,18 +8,18 @@ namespace XamarinApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DetalhesView : ContentPage
     {
-        public Veiculo Veiculo { get; set; }
+        public DetalhesViewModel ViewModel { get; set; }
         public DetalhesView(Veiculo veiculo)
         {
             InitializeComponent();
             Title = veiculo.Nome;
-            Veiculo = veiculo;
-            BindingContext = new DetalhesViewModel(veiculo);
+            ViewModel = new DetalhesViewModel(veiculo);
+            BindingContext = ViewModel;
         }
 
         private void BtnProximo_Clicked(object sender, System.EventArgs e)
         {
-            Navigation.PushAsync(new AgendamentoView(Veiculo));
+            Navigation.PushAsync(new AgendamentoView(ViewModel.Veiculo));
         }
     }
 }
