@@ -2,11 +2,49 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XamarinApp.Views.AgendamentoView">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+
+    <StackLayout>
+        <TableView>
+            <TableRoot>
+                <TableSection Title="Seus Dados">
+                    <EntryCell 
+                    Label="Nome:"
+                    Text="{Binding Nome}"/>
+                    <EntryCell 
+                    Label="Telefone:"
+                    Keyboard="Telephone"
+                    Text="{Binding Telefone}"/>
+                    <EntryCell 
+                    Label="E-mail:"  
+                    Keyboard="Email"
+                    Text="{Binding Email}"/>
+                </TableSection>
+
+                <TableSection Title="Agendamento">
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Margin="12,0,0,0">
+                            <Label 
+                            Text="Data:" />
+                            <DatePicker 
+                            Date="{Binding Data}"
+                            MinimumDate="{Binding DataMinima}"/>
+                        </StackLayout>
+                    </ViewCell>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal"  Margin="12,0,0,0">
+                            <Label 
+                                Text="Hora:"/>
+                            <TimePicker 
+                                Time="{Binding Hora}"/>
+                        </StackLayout>
+                    </ViewCell>
+                </TableSection>
+            </TableRoot>
+        </TableView>
+
+
+        <Button
+            Text="Agendar"
+            Clicked="Button_Clicked"/>
+    </StackLayout>
 </ContentPage>
