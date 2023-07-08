@@ -1,16 +1,20 @@
 ﻿using Xamarin.Forms;
 using XamarinApp.Models;
+using XamarinApp.ViewModels;
 using XamarinApp.Views;
 
 namespace XamarinApp.View
 {
     public partial class ListagemView : ContentPage
     {
+        public ListagemViewModel ViewModel { get; set; }
         public ListagemView()
         {
             InitializeComponent();
+            ViewModel = new ListagemViewModel();
+            BindingContext = ViewModel;
         }
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
 
@@ -20,6 +24,8 @@ namespace XamarinApp.View
                 {
                     Navigation.PushAsync(new DetalhesView(msg));
                 });
+
+            await ViewModel.GetVeiculos();
         }
 
         protected override void OnDisappearing()

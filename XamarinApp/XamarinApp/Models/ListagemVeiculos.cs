@@ -23,6 +23,11 @@ namespace XamarinApp.Models
                 {
                     Nome = "HB20 S",
                     Preco = 32000
+                },
+                 new Veiculo
+                {
+                    Nome = "Hillux",
+                    Preco = 100000
                 }
             };
         }

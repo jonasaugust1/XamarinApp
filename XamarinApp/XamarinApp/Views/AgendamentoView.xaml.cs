@@ -16,6 +16,7 @@ namespace XamarinApp.Views
             ViewModel = new AgendamentoViewModel(veiculo);
             BindingContext = ViewModel;
         }
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
