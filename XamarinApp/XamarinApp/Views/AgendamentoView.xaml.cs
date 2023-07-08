@@ -20,9 +20,13 @@ namespace XamarinApp.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            MessagingCenter.Subscribe<Veiculo>(this, "Agendar", (msg) =>
+            MessagingCenter.Subscribe<Veiculo>(this, "Agendar", async (msg) =>
             {
-                DisplayAlert("Agendamento",
+                bool confirma = await DisplayAlert("Salvar Agendamento", "Deseja mesmo enviar o agendamento?", "Sim", "Não");
+
+                if(confirma)
+                {
+                    await DisplayAlert("Agendamento",
 $@"
 Nome: {ViewModel.Nome}
 Telefone: {ViewModel.Telefone}
@@ -30,6 +34,7 @@ Email: {ViewModel.Email}
 Data: {ViewModel.Data:dd/MM/yyyy}
 Hora: {ViewModel.Hora}
 Modelo: {ViewModel.Veiculo.Nome}", "Ok");
+                }
             });
         }
 
