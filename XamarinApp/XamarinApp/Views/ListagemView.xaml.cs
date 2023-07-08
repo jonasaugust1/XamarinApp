@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using XamarinApp.Models;
 using XamarinApp.Views;
 
@@ -11,12 +10,22 @@ namespace XamarinApp.View
         {
             InitializeComponent();
         }
-
-        private void ListViewVeiculos_ItemTapped(object sender, ItemTappedEventArgs e)
+        protected override void OnAppearing()
         {
-            Veiculo veiculo = (Veiculo)e.Item;
+            base.OnAppearing();
 
-            Navigation.PushAsync(new DetalhesView(veiculo));
+            //Recebendo a mensagem do veiculo selecionado da ViewModel
+            MessagingCenter.Subscribe<Veiculo>(this, "VeiculoSelecionado", 
+                (msg) => 
+                {
+                    Navigation.PushAsync(new DetalhesView(msg));
+                });
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            MessagingCenter.Unsubscribe<Veiculo>(this, "VeiculoSelecionado");
         }
     }
 }

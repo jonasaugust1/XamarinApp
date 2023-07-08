@@ -12,7 +12,7 @@
         x:Name="ListViewVeiculos" 
         ItemsSource="{Binding Veiculos}"
         Margin="25"
-        ItemTapped="ListViewVeiculos_ItemTapped">
+        SelectedItem="{Binding VeiculoSelecionado}">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
