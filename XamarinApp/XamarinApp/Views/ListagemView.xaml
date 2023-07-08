@@ -3,37 +3,40 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XamarinApp.View.ListagemView"
              Title="Test Drive">
-    
-    <ListView 
+
+    <StackLayout Margin="25">
+        <ActivityIndicator
+            IsRunning="{Binding Carregando}"
+            IsVisible="{Binding Carregando}"
+        />
+        <ListView 
         x:Name="ListViewVeiculos" 
         ItemsSource="{Binding Veiculos}"
-        Margin="25"
         SelectedItem="{Binding VeiculoSelecionado}">
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <ViewCell>
-                    <ViewCell.View>
-                        <StackLayout Orientation="Horizontal">
-                            <Label 
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <StackLayout Orientation="Horizontal">
+                                <Label 
                                 Text="{Binding Nome}" 
                                 FontSize="20" 
                                 VerticalTextAlignment="Center">
-                            </Label>
-                            <Label 
+                                </Label>
+                                <Label 
                                 Text=" - "
                                 VerticalTextAlignment="Center">
-                                
-                            </Label>
-                            <Label 
+
+                                </Label>
+                                <Label 
                                 Text="{Binding PrecoFormatado}"
                                 VerticalTextAlignment="Center">
-                            </Label>
-                        </StackLayout>
-                    </ViewCell.View>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
-    
-
+                                </Label>
+                            </StackLayout>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
 </ContentPage>

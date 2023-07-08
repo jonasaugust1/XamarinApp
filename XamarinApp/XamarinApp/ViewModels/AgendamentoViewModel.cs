@@ -1,15 +1,12 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Xamarin.Forms;
 using XamarinApp.Models;
 
 namespace XamarinApp.ViewModels
 {
-    public class AgendamentoViewModel : INotifyPropertyChanged
+    public class AgendamentoViewModel : BaseViewModel
     {
-        public event PropertyChangedEventHandler PropertyChanged;
         public Agendamento Agendamento { get; set; }
         public Veiculo Veiculo
         {
@@ -95,10 +92,6 @@ namespace XamarinApp.ViewModels
             {
                 MessagingCenter.Send(Veiculo, "Agendar");
             });
-        }
-        public void OnPropertyChanged([CallerMemberName] string name = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }

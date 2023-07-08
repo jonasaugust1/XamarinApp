@@ -1,14 +1,11 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Xamarin.Forms;
 using XamarinApp.Models;
 
 namespace XamarinApp.ViewModels
 {
-    public class DetalhesViewModel : INotifyPropertyChanged
+    public class DetalhesViewModel : BaseViewModel
     {
-        public event PropertyChangedEventHandler PropertyChanged;
         public Veiculo Veiculo { get; set; }
         public string TextoFreioABS
         {
@@ -85,15 +82,6 @@ namespace XamarinApp.ViewModels
             {
                 MessagingCenter.Send(Veiculo, "Proximo");
             });
-        }
-
-        /*
-        Se nada for passado no parâmetro o CallerMemberName vai assumir 
-        que o name é o da própria propriedade que está chamando o método
-        */
-        public void OnPropertyChanged([CallerMemberName]string name = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }
