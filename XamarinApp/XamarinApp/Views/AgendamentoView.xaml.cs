@@ -1,5 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XamarinApp.Models;
 using XamarinApp.ViewModels;
@@ -17,10 +16,12 @@ namespace XamarinApp.Views
             ViewModel = new AgendamentoViewModel(veiculo);
             BindingContext = ViewModel;
         }
-
-        private void Button_Clicked(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
-            DisplayAlert("Agendamento", 
+            base.OnAppearing();
+            MessagingCenter.Subscribe<Veiculo>(this, "Agendar", (msg) =>
+            {
+                DisplayAlert("Agendamento",
 $@"
 Nome: {ViewModel.Nome}
 Telefone: {ViewModel.Telefone}
@@ -28,6 +29,13 @@ Email: {ViewModel.Email}
 Data: {ViewModel.Data:dd/MM/yyyy}
 Hora: {ViewModel.Hora}
 Modelo: {ViewModel.Veiculo.Nome}", "Ok");
+            });
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            MessagingCenter.Unsubscribe<Veiculo>(this, "Agendar");
         }
     }
 }

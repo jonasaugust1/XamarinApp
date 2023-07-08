@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
+using Xamarin.Forms;
 using XamarinApp.Models;
 
 namespace XamarinApp.ViewModels
@@ -82,12 +84,17 @@ namespace XamarinApp.ViewModels
                 Agendamento.HoraAgendamento = value;
             }
         }
+        public ICommand AgendarCommand { get; set; }
         public AgendamentoViewModel(Veiculo veiculo)
         {
             Agendamento = new Agendamento()
             {
                 Veiculo = veiculo
             };
+            AgendarCommand = new Command(() =>
+            {
+                MessagingCenter.Send(Veiculo, "Agendar");
+            });
         }
         public void OnPropertyChanged([CallerMemberName] string name = "")
         {

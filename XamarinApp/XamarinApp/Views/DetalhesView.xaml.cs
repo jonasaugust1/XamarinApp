@@ -12,14 +12,23 @@ namespace XamarinApp.Views
         public DetalhesView(Veiculo veiculo)
         {
             InitializeComponent();
-            Title = veiculo.Nome;
             ViewModel = new DetalhesViewModel(veiculo);
+            Title = veiculo.Nome;
             BindingContext = ViewModel;
         }
 
-        private void BtnProximo_Clicked(object sender, System.EventArgs e)
+        protected override void OnAppearing()
         {
-            Navigation.PushAsync(new AgendamentoView(ViewModel.Veiculo));
+            base.OnAppearing();
+            MessagingCenter.Subscribe<Veiculo>(this, "Proximo", (msg) =>
+            {
+                Navigation.PushAsync(new AgendamentoView(msg));
+            });
+        }
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            MessagingCenter.Unsubscribe<Veiculo>(this, "Proximo");
         }
     }
 }

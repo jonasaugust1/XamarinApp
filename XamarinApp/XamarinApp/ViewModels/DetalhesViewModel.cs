@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
+using Xamarin.Forms;
 using XamarinApp.Models;
 
 namespace XamarinApp.ViewModels
@@ -75,9 +77,14 @@ namespace XamarinApp.ViewModels
                 return Veiculo.ValorTotal;
             }
         }
+        public ICommand ProximoCommand { get; set; }
         public DetalhesViewModel(Veiculo veiculo)
         {
             Veiculo = veiculo;
+            ProximoCommand = new Command(() =>
+            {
+                MessagingCenter.Send(Veiculo, "Proximo");
+            });
         }
 
         /*
