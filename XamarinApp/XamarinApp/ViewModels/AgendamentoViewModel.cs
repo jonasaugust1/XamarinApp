@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using XamarinApp.Models;
@@ -7,6 +11,7 @@ namespace XamarinApp.ViewModels
 {
     public class AgendamentoViewModel : BaseViewModel
     {
+        const string URL_POST_AGENDAMENTO = "https://jonasaugust1.github.io/CarApi/salvarAgendamento";
         public Agendamento Agendamento { get; set; }
         public Veiculo Veiculo
         {
@@ -92,6 +97,39 @@ namespace XamarinApp.ViewModels
             {
                 MessagingCenter.Send(Veiculo, "Agendar");
             });
+        }
+        public async Task SalvarAgendamento()
+        {
+            HttpClient client = new HttpClient();
+            DateTime dataHoraAgendamento = new DateTime(
+                Data.Year,
+                Data.Month,
+                Data.Day,
+                Hora.Hours,
+                Hora.Minutes,
+                Hora.Seconds);
+
+            string json = JsonConvert.SerializeObject(new
+            {
+                nome = Nome,
+                fone = Telefone,
+                email = Email,
+                carro = Veiculo.Nome,
+                preco = Veiculo.Preco,
+                dataAgendamento = dataHoraAgendamento
+            });
+
+            StringContent conteudo = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpResponseMessage resposta = await client.PostAsync(URL_POST_AGENDAMENTO, conteudo);
+
+            if(resposta.IsSuccessStatusCode)
+            {
+                MessagingCenter.Send(Agendamento, "SucessoAgendamento");
+            }
+            else
+            {
+                MessagingCenter.Send(new ArgumentException(), "FalhaAgendamento");
+            }
         }
     }
 }

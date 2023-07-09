@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XamarinApp.Models;
 using XamarinApp.ViewModels;
@@ -26,15 +27,18 @@ namespace XamarinApp.Views
 
                 if(confirma)
                 {
-                    await DisplayAlert("Agendamento",
-$@"
-Nome: {ViewModel.Nome}
-Telefone: {ViewModel.Telefone}
-Email: {ViewModel.Email}
-Data: {ViewModel.Data:dd/MM/yyyy}
-Hora: {ViewModel.Hora}
-Modelo: {ViewModel.Veiculo.Nome}", "Ok");
+                    await ViewModel.SalvarAgendamento();
                 }
+            });
+
+            MessagingCenter.Subscribe<Agendamento>(this, "SucessoAgendamento", (msg) =>
+            {
+                DisplayAlert("Agendamento", "Agendamento salvo com sucesso.", "Ok");
+            });
+
+            MessagingCenter.Subscribe<ArgumentException>(this, "FalhaAgendamento", (msg) =>
+            {
+                DisplayAlert("Agendamento", "Falha ao salvar agendamento. Verifique os dados e tente novamente mais tarde", "Ok");
             });
         }
 
@@ -42,6 +46,8 @@ Modelo: {ViewModel.Veiculo.Nome}", "Ok");
         {
             base.OnDisappearing();
             MessagingCenter.Unsubscribe<Veiculo>(this, "Agendar");
+            MessagingCenter.Unsubscribe<Agendamento>(this, "SucessoAgendamento");
+            MessagingCenter.Unsubscribe<ArgumentException>(this, "FalhaAgendamento");
         }
     }
 }
