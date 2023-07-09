@@ -33,6 +33,8 @@ namespace XamarinApp.ViewModels
             set
             {
                 Agendamento.Nome = value;
+                OnPropertyChanged();
+                ((Command)AgendarCommand).ChangeCanExecute();
             }
         }
         public string Telefone
@@ -44,6 +46,8 @@ namespace XamarinApp.ViewModels
             set
             {
                 Agendamento.Telefone = value;
+                OnPropertyChanged();
+                ((Command)AgendarCommand).ChangeCanExecute();
             }
         }
         public string Email
@@ -55,6 +59,8 @@ namespace XamarinApp.ViewModels
             set
             {
                 Agendamento.Email = value;
+                OnPropertyChanged();
+                ((Command)AgendarCommand).ChangeCanExecute();
             }
         }
         public DateTime Data
@@ -96,7 +102,14 @@ namespace XamarinApp.ViewModels
             AgendarCommand = new Command(() =>
             {
                 MessagingCenter.Send(Veiculo, "Agendar");
-            });
+            },
+            () =>
+            {
+                return !string.IsNullOrEmpty(Nome)
+                && string.IsNullOrEmpty(Telefone)
+                && string.IsNullOrEmpty(Email);
+            }
+            );
         }
         public async Task SalvarAgendamento()
         {
