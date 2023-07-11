@@ -1,17 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="XamarinApp.Views.LoginView">
+             x:Class="XamarinApp.Views.LoginView"
+             xmlns:vm="clr-namespace:XamarinApp.ViewModels">
+    <ContentPage.BindingContext>
+        <vm:LoginViewModel/>
+    </ContentPage.BindingContext>
 
     <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
         <Image Source="logoTestDrive.png"/>
         <Entry 
-            Placeholder="Usuário"/>
+            Placeholder="Usuário"
+            Text="{Binding Usuario}"/>
         <Entry 
             Placeholder="Senha"
-            IsPassword="True"/>
+            IsPassword="True"
+            Text="{Binding Senha}"/>
         <Button 
             Text="Entrar"
-            Clicked="Button_Clicked"/>
+            Command="{Binding Logar}"/>
     </StackLayout>
 </ContentPage>

@@ -1,6 +1,5 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using XamarinApp.Models;
 
 namespace XamarinApp.Views
 {
@@ -11,10 +10,10 @@ namespace XamarinApp.Views
         {
             InitializeComponent();
         }
-
-        private void Button_Clicked(object sender, System.EventArgs e)
+        protected override void OnAppearing()
         {
-            MessagingCenter.Send(new Usuario(), "SucessoLogin");
+            base.OnAppearing();
+
         }
     }
 }

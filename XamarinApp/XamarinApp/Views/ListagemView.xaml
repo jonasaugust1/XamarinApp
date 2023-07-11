@@ -10,28 +10,27 @@
             IsVisible="{Binding Carregando}"
         />
         <ListView 
-        x:Name="ListViewVeiculos" 
-        ItemsSource="{Binding Veiculos}"
-        SelectedItem="{Binding VeiculoSelecionado}">
+            x:Name="ListViewVeiculos" 
+            ItemsSource="{Binding Veiculos}"
+            SelectedItem="{Binding VeiculoSelecionado}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <ViewCell.View>
                             <StackLayout Orientation="Horizontal">
                                 <Label 
-                                Text="{Binding Nome}" 
-                                FontSize="20" 
-                                VerticalTextAlignment="Center">
-                                </Label>
+                                    Text="{Binding Nome}" 
+                                    FontSize="20" 
+                                    VerticalTextAlignment="Center"
+                                />
                                 <Label 
-                                Text=" - "
-                                VerticalTextAlignment="Center">
-
-                                </Label>
+                                    Text=" - "
+                                    VerticalTextAlignment="Center"
+                                />
                                 <Label 
-                                Text="{Binding PrecoFormatado}"
-                                VerticalTextAlignment="Center">
-                                </Label>
+                                    Text="{Binding PrecoFormatado}"
+                                    VerticalTextAlignment="Center"
+                                />
                             </StackLayout>
                         </ViewCell.View>
                     </ViewCell>
