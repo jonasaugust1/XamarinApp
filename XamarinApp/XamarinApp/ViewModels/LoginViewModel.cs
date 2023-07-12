@@ -1,4 +1,7 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Windows.Input;
 using Xamarin.Forms;
 using XamarinApp.Models;
 
@@ -35,9 +38,24 @@ namespace XamarinApp.ViewModels
         public ICommand LogarCommand { get; private set; }
         public LoginViewModel()
         {
-            LogarCommand = new Command(() =>
+            LogarCommand = new Command(async () =>
             {
-                MessagingCenter.Send(new Usuario(), "SucessoLogin");
+                using(HttpClient client = new HttpClient())
+                {
+                    FormUrlEncodedContent camposFormulario = new FormUrlEncodedContent(new[]
+                    {
+                        new KeyValuePair<string, string>("email", _Usuario),
+                        new KeyValuePair<string, string>("senha", _Senha),
+                    });
+
+                    client.BaseAddress = new Uri("https://jonasaugust1.github.io/CarApi");
+                    HttpResponseMessage resultado = await client.PostAsync("/login", camposFormulario);
+
+                    if(resultado.IsSuccessStatusCode)
+                    {
+                        MessagingCenter.Send(new Usuario(), "SucessoLogin");
+                    }
+                }
             }, () =>
             {
                 return !string.IsNullOrWhiteSpace(_Usuario) && !string.IsNullOrWhiteSpace(_Senha);
