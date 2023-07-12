@@ -16,30 +16,32 @@ namespace XamarinApp.Services
             {
                 FormUrlEncodedContent camposFormulario = new FormUrlEncodedContent(new[]
                 {
-                        new KeyValuePair<string, string>("email", login.Email),
-                        new KeyValuePair<string, string>("senha", login.Senha),
+                        new KeyValuePair<string, string>("login", login.Email),
+                        new KeyValuePair<string, string>("password", login.Senha),
                     });
 
                 client.BaseAddress = new Uri("https://jonasaugust1.github.io/CarApi");
 
+                HttpResponseMessage resultado = new HttpResponseMessage();
                 try
                 {
-                    HttpResponseMessage resultado = await client.PostAsync("/login", camposFormulario);
-
-                    if (resultado.IsSuccessStatusCode)
-                    {
-                        MessagingCenter.Send(new Usuario(), "SucessoLogin");
-                    }
-                    else
-                    {
-                        MessagingCenter.Send(new LoginException("Usuário ou Senha incorretos."), "FalhaLogin");
-                    }
+                    resultado = await client.PostAsync("/login", camposFormulario);
                 }
-                catch(Exception ex)
+                catch
                 {
                     MessagingCenter.Send(new LoginException(@"Ocorreu um erro de comunicação com o servidor.
 Por favor verifique a sua conexão e tente novamente mais tarde"), "FalhaLogin");
-                } 
+                }
+
+                //trecho de validação "admin" colocado somente para fazer o login já que não tem API
+                if (resultado.IsSuccessStatusCode || (login.Email == "admin" && login.Senha == "admin"))
+                {
+                    MessagingCenter.Send(new Usuario(), "SucessoLogin");
+                }
+                else
+                {
+                    MessagingCenter.Send(new LoginException("Usuário ou Senha incorretos."), "FalhaLogin");
+                }
             }
         }
     }

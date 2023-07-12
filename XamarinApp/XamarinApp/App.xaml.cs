@@ -17,7 +17,8 @@ namespace XamarinApp
         {
             MessagingCenter.Subscribe<Usuario>(this, "SucessoLogin", (msg) =>
             {
-                MainPage = new NavigationPage(new ListagemView());
+                //MainPage = new NavigationPage(new ListagemView());
+                MainPage = new MasterDetailView();
             });
         }
 
