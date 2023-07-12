@@ -13,7 +13,6 @@ namespace XamarinApp.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
         }
     }
 }

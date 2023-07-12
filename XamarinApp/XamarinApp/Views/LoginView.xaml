@@ -18,6 +18,6 @@
             Text="{Binding Senha}"/>
         <Button 
             Text="Entrar"
-            Command="{Binding Logar}"/>
+            Command="{Binding LogarCommand}"/>
     </StackLayout>
 </ContentPage>

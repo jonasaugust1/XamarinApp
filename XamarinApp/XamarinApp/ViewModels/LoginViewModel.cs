@@ -16,6 +16,7 @@ namespace XamarinApp.ViewModels
             set
             {
                 _Usuario = value;
+                ((Command)LogarCommand).ChangeCanExecute();
             }
         }
         private string _Senha;
@@ -28,14 +29,18 @@ namespace XamarinApp.ViewModels
             set
             {
                 _Senha = value;
+                ((Command)LogarCommand).ChangeCanExecute();
             }
         }
-        public ICommand Logar { get; private set; }
+        public ICommand LogarCommand { get; private set; }
         public LoginViewModel()
         {
-            Logar = new Command(() =>
+            LogarCommand = new Command(() =>
             {
                 MessagingCenter.Send(new Usuario(), "SucessoLogin");
+            }, () =>
+            {
+                return !string.IsNullOrWhiteSpace(_Usuario) && !string.IsNullOrWhiteSpace(_Senha);
             });
         }
     }
