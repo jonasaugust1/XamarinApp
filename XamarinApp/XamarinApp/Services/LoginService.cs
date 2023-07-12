@@ -21,16 +21,25 @@ namespace XamarinApp.Services
                     });
 
                 client.BaseAddress = new Uri("https://jonasaugust1.github.io/CarApi");
-                HttpResponseMessage resultado = await client.PostAsync("/login", camposFormulario);
 
-                if (resultado.IsSuccessStatusCode)
+                try
                 {
-                    MessagingCenter.Send(new Usuario(), "SucessoLogin");
+                    HttpResponseMessage resultado = await client.PostAsync("/login", camposFormulario);
+
+                    if (resultado.IsSuccessStatusCode)
+                    {
+                        MessagingCenter.Send(new Usuario(), "SucessoLogin");
+                    }
+                    else
+                    {
+                        MessagingCenter.Send(new LoginException("Usuário ou Senha incorretos."), "FalhaLogin");
+                    }
                 }
-                else
+                catch(Exception ex)
                 {
-                    MessagingCenter.Send(new LoginException("Usuário ou Senha incorretos."), "FalhaLogin");
-                }
+                    MessagingCenter.Send(new LoginException(@"Ocorreu um erro de comunicação com o servidor.
+Por favor verifique a sua conexão e tente novamente mais tarde"), "FalhaLogin");
+                } 
             }
         }
     }
