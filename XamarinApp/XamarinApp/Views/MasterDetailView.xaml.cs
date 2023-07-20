@@ -18,6 +18,7 @@ namespace XamarinApp.Views
         {
             InitializeComponent();
             _Usuario = usuario;
+            Master = new MasterView(usuario);
         }
     }
 }

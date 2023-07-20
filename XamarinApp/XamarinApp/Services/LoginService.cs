@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -36,7 +37,10 @@ Por favor verifique a sua conexão e tente novamente mais tarde"), "FalhaLogin")
                 //trecho de validação "admin" colocado somente para fazer o login já que não tem API
                 if (resultado.IsSuccessStatusCode || (login.Email == "admin" && login.Senha == "admin"))
                 {
-                    MessagingCenter.Send(new Usuario(), "SucessoLogin");
+                    string conteudoResultado = await resultado.Content.ReadAsStringAsync();
+                    ResultadoLogin resultadoLogin = JsonConvert.DeserializeObject<ResultadoLogin>(conteudoResultado);
+
+                    MessagingCenter.Send(resultadoLogin.Usuario, "SucessoLogin");
                 }
                 else
                 {

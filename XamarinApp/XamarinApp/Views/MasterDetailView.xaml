@@ -3,11 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:view="clr-namespace:XamarinApp.Views"
              x:Class="XamarinApp.Views.MasterDetailView">
-    <MasterDetailPage.Master>
-        <!-- perfil do usuário -->
-        <view:MasterView/>
-    </MasterDetailPage.Master>
-
     <MasterDetailPage.Detail>
         <!-- listagem de veículos (navegação) -->
         <NavigationPage>
