@@ -37,10 +37,24 @@ Por favor verifique a sua conexão e tente novamente mais tarde"), "FalhaLogin")
                 //trecho de validação "admin" colocado somente para fazer o login já que não tem API
                 if (resultado.IsSuccessStatusCode || (login.Email == "admin" && login.Senha == "admin"))
                 {
-                    string conteudoResultado = await resultado.Content.ReadAsStringAsync();
-                    ResultadoLogin resultadoLogin = JsonConvert.DeserializeObject<ResultadoLogin>(conteudoResultado);
-
-                    MessagingCenter.Send(resultadoLogin.Usuario, "SucessoLogin");
+                    if(resultado.IsSuccessStatusCode)
+                    {
+                        string conteudoResultado = await resultado.Content.ReadAsStringAsync();
+                        ResultadoLogin resultadoLogin = JsonConvert.DeserializeObject<ResultadoLogin>(conteudoResultado);
+                        MessagingCenter.Send(resultadoLogin.Usuario, "SucessoLogin");
+                    }
+                    else
+                    {
+                        Usuario usuario = new Usuario()
+                        {
+                            Id = 0,
+                            Nome = "admin",
+                            DataNascimento = default,
+                            Email = "admin@gmail.com",
+                            Telefone = "9995559044"
+                        };
+                        MessagingCenter.Send(usuario, "SucessoLogin");
+                    }
                 }
                 else
                 {
