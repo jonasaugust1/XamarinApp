@@ -31,7 +31,28 @@
         </ContentPage>
 
         <ContentPage Title="Editar">
-
+            <Frame 
+                OutlineColor="Silver" 
+                Margin="15"
+                VerticalOptions="CenterAndExpand">
+                <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                    <!--TableView organiza campos de coleta de dados-->
+                    <TableView>
+                        <TableRoot>
+                            <TableSection Title="Dados Pessoais">
+                                <EntryCell Placeholder="Nome"/>
+                                <EntryCell Placeholder="Data de Nascimento"/>
+                                <EntryCell Placeholder="Telefone"/>
+                                <EntryCell Placeholder="E-mail"/>
+                            </TableSection>
+                        </TableRoot>
+                    </TableView>
+                    <Button 
+                        Text="Salvar"
+                        Command="{Binding EditarPerfilCommand}"
+                    />
+                </StackLayout>
+            </Frame>
         </ContentPage>
     </TabbedPage.Children>
 </TabbedPage>
