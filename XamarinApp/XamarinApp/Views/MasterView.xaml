@@ -3,8 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XamarinApp.Views.MasterView"
              Title="Perfil">
-    <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
-        <Label Text="Jonas Augusto"/>
-        <Label Text="jonas@gmail.com"/>
-    </StackLayout>
+    <Frame 
+        OutlineColor="Silver" 
+        Margin="15"
+        VerticalOptions="CenterAndExpand">
+        <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+            <Label Text="{Binding Nome}"/>
+            <BoxView 
+                HeightRequest="1"
+                HorizontalOptions="Fill"
+                Color="Gray"
+            />
+            <Label Text="{Binding Email}"/>
+            <BoxView 
+                HeightRequest="1"
+                HorizontalOptions="Fill"
+                Color="Gray"
+            />
+            <Button Text="Perfil"/>
+        </StackLayout>
+    </Frame>
 </ContentPage>
