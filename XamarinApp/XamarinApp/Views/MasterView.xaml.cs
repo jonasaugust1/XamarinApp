@@ -14,5 +14,19 @@ namespace XamarinApp.Views
             InitializeComponent();
             BindingContext = new MasterViewModel(usuario); ;
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            MessagingCenter.Subscribe<Usuario>(this, "EditarPerfil", (msg) =>
+            {
+                CurrentPage = Children[1];
+            });
+        }
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            MessagingCenter.Unsubscribe<Usuario>(this, "EditarPerfil");
+        }
     }
 }
