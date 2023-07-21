@@ -40,16 +40,28 @@
                     <TableView>
                         <TableRoot>
                             <TableSection Title="Dados Pessoais">
-                                <EntryCell Placeholder="Nome"/>
-                                <EntryCell Placeholder="Data de Nascimento"/>
-                                <EntryCell Placeholder="Telefone"/>
-                                <EntryCell Placeholder="E-mail"/>
+                                <EntryCell 
+                                    Placeholder="Nome" 
+                                    Text="{Binding Nome}"
+                                />
+                                <EntryCell 
+                                    Placeholder="Data de Nascimento" 
+                                    Text="{Binding DataNascimento}"
+                                />
+                                <EntryCell 
+                                    Placeholder="Telefone" 
+                                    Text="{Binding Telefone}"
+                                />
+                                <EntryCell 
+                                    Placeholder="E-mail" 
+                                    Text="{Binding Email}"
+                                />
                             </TableSection>
                         </TableRoot>
                     </TableView>
                     <Button 
                         Text="Salvar"
-                        Command="{Binding EditarPerfilCommand}"
+                        Command="{Binding SalvarPerfilCommand}"
                     />
                 </StackLayout>
             </Frame>

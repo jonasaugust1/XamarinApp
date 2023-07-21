@@ -15,6 +15,18 @@ namespace XamarinApp.ViewModels
             set { _Usuario.Nome = value; }
         }
 
+        public DateTime DataNascimento
+        {
+            get { return _Usuario.DataNascimento; }
+            set { _Usuario.DataNascimento = value; }
+        }
+
+        public string Telefone
+        {
+            get { return _Usuario.Telefone; }
+            set { _Usuario.Telefone = value; }
+        }
+
         public string Email
         {
             get { return _Usuario.Email; }
@@ -23,13 +35,23 @@ namespace XamarinApp.ViewModels
 
         private readonly Usuario _Usuario;
         public ICommand EditarPerfilCommand {get; private set;}
+        public ICommand SalvarPerfilCommand { get; private set; }
 
         public MasterViewModel(Usuario usuario)
         {
             _Usuario = usuario;
+            DefinirComandos(usuario);
+        }
+        private void DefinirComandos(Usuario usuario)
+        {
             EditarPerfilCommand = new Command(() =>
             {
                 MessagingCenter.Send(usuario, "EditarPerfil");
+            });
+
+            SalvarPerfilCommand = new Command(() =>
+            {
+                MessagingCenter.Send(usuario, "SalvarPerfil");
             });
         }
     }
