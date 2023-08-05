@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Windows.Input;
 using Xamarin.Forms;
+using XamarinApp.Media;
 using XamarinApp.Models;
 
 namespace XamarinApp.ViewModels
@@ -58,7 +59,7 @@ namespace XamarinApp.ViewModels
         public ICommand EditarPerfilCommand {get; private set;}
         public ICommand SalvarCommand { get; private set; }
         public ICommand EditarCommand { get; private set; }
-
+        public ICommand TirarFotoCommand { get; private set; }
         public MasterViewModel(Usuario usuario)
         {
             _Usuario = usuario;
@@ -81,6 +82,12 @@ namespace XamarinApp.ViewModels
             EditarCommand = new Command(() =>
             {
                 Ativado = true;
+            });
+
+            TirarFotoCommand = new Command(() =>
+            {
+                //Executar projeto Android no projeto Portable
+                DependencyService.Get<ICamera>().TirarFoto();
             });
         }
     }

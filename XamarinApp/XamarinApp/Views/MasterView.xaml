@@ -50,6 +50,10 @@
                     <Image 
                         Source="{Binding FotoPerfil}"
                     />
+                    <Button 
+                        Text="Tirar Foto"
+                        Command="{Binding TirarFotoCommand}"
+                    />
                     <!--TableView organiza campos de coleta de dados-->
                     <TableView>
                         <TableRoot>
