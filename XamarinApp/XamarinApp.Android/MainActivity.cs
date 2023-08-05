@@ -57,7 +57,7 @@ namespace XamarinApp.Droid
 
                 ArquivoImagem = PegarArquivoImagem();
 
-                intent.PutExtra(MediaStore.ExtraOutput, Android.Net.Uri.FromFile(arquivoImagem));
+                intent.PutExtra(MediaStore.ExtraOutput, Android.Net.Uri.FromFile(ArquivoImagem));
 
                 activity.StartActivityForResult(intent, 0);
             }
@@ -97,7 +97,18 @@ namespace XamarinApp.Droid
         {
             base.OnActivityResult(requestCode, resultCode, data);
 
-            MessagingCenter.Send(ArquivoImagem, "TirarFoto");
+            if(resultCode == Result.Ok)
+            {
+                byte[] bytes;
+
+                using (FileInputStream stream = new FileInputStream(ArquivoImagem))
+                {
+                    bytes = new byte[ArquivoImagem.Length()];
+                    stream.Read(bytes);
+                }
+                    
+                MessagingCenter.Send(bytes, "FotoTirada");
+            }
         }
     }
 }

@@ -89,6 +89,11 @@ namespace XamarinApp.ViewModels
                 //Executar projeto Android no projeto Portable
                 DependencyService.Get<ICamera>().TirarFoto();
             });
+
+            MessagingCenter.Subscribe<byte[]>(this, "FotoTirada", (bytes) => 
+            {
+  
+            });
         }
     }
 }
