@@ -43,6 +43,17 @@ namespace XamarinApp.ViewModels
             }
         }
 
+        private ImageSource _FotoPerfil = "perfil.png";
+        public ImageSource FotoPerfil
+        {
+            get { return _FotoPerfil; }
+            private set
+            {
+                _FotoPerfil = value;
+                OnPropertyChanged();
+            }
+        }
+
         private readonly Usuario _Usuario;
         public ICommand EditarPerfilCommand {get; private set;}
         public ICommand SalvarCommand { get; private set; }
