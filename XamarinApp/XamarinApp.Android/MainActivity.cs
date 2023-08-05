@@ -10,6 +10,7 @@ using Android.Provider;
 using Xamarin.Essentials;
 using Android;
 using AndroidX.Core.App;
+using Java.IO;
 
 //Anotação que indica que a classe implementa uma interface dentro do DependencyService
 [assembly: Dependency(typeof(MainActivity))]
@@ -20,6 +21,8 @@ namespace XamarinApp.Droid
     {
         private const int CAMERA_PERMISSION_REQUEST_CODE = 100;
         private static readonly string[] CameraPermissions = { Manifest.Permission.Camera };
+        static File ArquivoImagem;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -51,6 +54,11 @@ namespace XamarinApp.Droid
             {
                 //Descreve qual ação eu quero fazer
                 Intent intent = new Intent(MediaStore.ActionImageCapture);
+
+                ArquivoImagem = PegarArquivoImagem();
+
+                intent.PutExtra(MediaStore.ExtraOutput, Android.Net.Uri.FromFile(arquivoImagem));
+
                 activity.StartActivityForResult(intent, 0);
             }
             else
@@ -67,6 +75,29 @@ namespace XamarinApp.Droid
         private void RequestCameraPermission()
         {
             ActivityCompat.RequestPermissions(Platform.CurrentActivity, CameraPermissions, CAMERA_PERMISSION_REQUEST_CODE);
+        }
+
+        private File PegarArquivoImagem()
+        {
+            File diretorio = new File(
+                    Environment.GetExternalStoragePublicDirectory(Environment.DirectoryPictures),
+                    "Imagens");
+
+            if (!diretorio.Exists())
+            {
+                diretorio.Mkdirs();
+            }
+
+            File arquivoImagem = new File(diretorio, "MinhaFoto.jpg");
+
+            return arquivoImagem;
+        }
+
+        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+
+            MessagingCenter.Send(ArquivoImagem, "TirarFoto");
         }
     }
 }
