@@ -1,8 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="XamarinApp.Views.MasterView"
-             Title="Perfil">
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:converters="clr-namespace:XamarinApp.Converters"
+            x:Class="XamarinApp.Views.MasterView"
+            Title="Perfil">
+    
+    <TabbedPage.Resources>
+        <ResourceDictionary>
+            <converters:NegativoConverter x:Key="negativo"/>
+        </ResourceDictionary>
+    </TabbedPage.Resources>
+    
     <TabbedPage.Children>
         <ContentPage Title="Usuário">
             <Frame 
@@ -43,22 +51,22 @@
                                 <EntryCell 
                                     Placeholder="Nome" 
                                     Text="{Binding Nome}"
-                                    IsEnabled="{Binding InputAtivado}"
+                                    IsEnabled="{Binding Ativado}"
                                 />
                                 <EntryCell 
                                     Placeholder="Data de Nascimento" 
                                     Text="{Binding DataNascimento}"
-                                    IsEnabled="{Binding InputAtivado}"
+                                    IsEnabled="{Binding Ativado}"
                                 />
                                 <EntryCell 
                                     Placeholder="Telefone" 
                                     Text="{Binding Telefone}"
-                                    IsEnabled="{Binding InputAtivado}"
+                                    IsEnabled="{Binding Ativado}"
                                 />
                                 <EntryCell 
                                     Placeholder="E-mail" 
                                     Text="{Binding Email}"
-                                    IsEnabled="{Binding InputAtivado}"
+                                    IsEnabled="{Binding Ativado}"
                                 />
                             </TableSection>
                         </TableRoot>
@@ -66,12 +74,12 @@
                     <Button 
                         Text="Salvar"
                         Command="{Binding SalvarCommand}"
-                        IsVisible="{Binding BtnSalvarVisivel}"
+                        IsVisible="{Binding Ativado}"
                     />
                     <Button 
                         Text="Editar"
                         Command="{Binding EditarCommand}"
-                        IsVisible="{Binding BtnEditarVisivel}"
+                        IsVisible="{Binding Ativado, Converter={StaticResource Key=negativo}}"
                     />
                 </StackLayout>
             </Frame>

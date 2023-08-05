@@ -32,35 +32,13 @@ namespace XamarinApp.ViewModels
             set { _Usuario.Email = value; }
         }
 
-        private bool _InputAtivado = false;
-        public bool InputAtivado
+        private bool _Ativado = false;
+        public bool Ativado
         {
-            get { return _InputAtivado; }
+            get { return _Ativado; }
             private set 
             {
-                _InputAtivado = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private bool _BtnEditarVisivel = true;
-        public bool BtnEditarVisivel
-        {
-            get { return _BtnEditarVisivel; }
-            private set
-            {
-                _BtnEditarVisivel = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private bool _BtnSalvarVisivel = false;
-        public bool BtnSalvarVisivel
-        {
-            get { return _BtnSalvarVisivel; }
-            private set
-            {
-                _BtnSalvarVisivel = value;
+                _Ativado = value;
                 OnPropertyChanged();
             }
         }
@@ -84,18 +62,14 @@ namespace XamarinApp.ViewModels
 
             SalvarCommand = new Command(() =>
             {
-                MessagingCenter.Send(usuario, "SalvarPerfil");
+                Ativado = false;
 
-                InputAtivado = false;
-                BtnSalvarVisivel = false;
-                BtnEditarVisivel = true;
+                MessagingCenter.Send(usuario, "SalvarPerfil");
             });
 
             EditarCommand = new Command(() =>
             {
-                InputAtivado = true;
-                BtnSalvarVisivel = true;
-                BtnEditarVisivel = false;
+                Ativado = true;
             });
         }
     }
