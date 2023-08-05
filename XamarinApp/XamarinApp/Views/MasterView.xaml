@@ -43,25 +43,35 @@
                                 <EntryCell 
                                     Placeholder="Nome" 
                                     Text="{Binding Nome}"
+                                    IsEnabled="{Binding InputAtivado}"
                                 />
                                 <EntryCell 
                                     Placeholder="Data de Nascimento" 
                                     Text="{Binding DataNascimento}"
+                                    IsEnabled="{Binding InputAtivado}"
                                 />
                                 <EntryCell 
                                     Placeholder="Telefone" 
                                     Text="{Binding Telefone}"
+                                    IsEnabled="{Binding InputAtivado}"
                                 />
                                 <EntryCell 
                                     Placeholder="E-mail" 
                                     Text="{Binding Email}"
+                                    IsEnabled="{Binding InputAtivado}"
                                 />
                             </TableSection>
                         </TableRoot>
                     </TableView>
                     <Button 
                         Text="Salvar"
-                        Command="{Binding SalvarPerfilCommand}"
+                        Command="{Binding SalvarCommand}"
+                        IsVisible="{Binding BtnSalvarVisivel}"
+                    />
+                    <Button 
+                        Text="Editar"
+                        Command="{Binding EditarCommand}"
+                        IsVisible="{Binding BtnEditarVisivel}"
                     />
                 </StackLayout>
             </Frame>
