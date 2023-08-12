@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.IO;
 using System.Windows.Input;
 using Xamarin.Forms;
 using XamarinApp.Media;
@@ -92,7 +93,7 @@ namespace XamarinApp.ViewModels
 
             MessagingCenter.Subscribe<byte[]>(this, "FotoTirada", (bytes) => 
             {
-  
+                FotoPerfil = ImageSource.FromStream(() => new MemoryStream(bytes));
             });
         }
     }
