@@ -1,10 +1,12 @@
 ﻿using Newtonsoft.Json;
+using SQLite;
 using System;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using XamarinApp.Data;
 using XamarinApp.Models;
 
 namespace XamarinApp.ViewModels
@@ -135,13 +137,23 @@ namespace XamarinApp.ViewModels
             StringContent conteudo = new StringContent(json, Encoding.UTF8, "application/json");
             HttpResponseMessage resposta = await client.PostAsync(URL_POST_AGENDAMENTO, conteudo);
 
-            if(resposta.IsSuccessStatusCode)
+            SalvarAgendamentoDB();
+
+            if (resposta.IsSuccessStatusCode)
             {
                 MessagingCenter.Send(Agendamento, "SucessoAgendamento");
             }
             else
             {
                 MessagingCenter.Send(new ArgumentException(), "FalhaAgendamento");
+            }
+        }
+
+        private void SalvarAgendamentoDB()
+        {
+            using (SQLiteConnection conexao = DependencyService.Get<ISQLite>().PegarConexao())
+            {
+
             }
         }
     }

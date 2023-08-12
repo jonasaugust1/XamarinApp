@@ -87,7 +87,7 @@ namespace XamarinApp.ViewModels
 
             TirarFotoCommand = new Command(() =>
             {
-                //Executar projeto Android no projeto Portable
+                //Executar projeto Android no projeto Portable através de uma interface comum
                 DependencyService.Get<ICamera>().TirarFoto();
             });
 

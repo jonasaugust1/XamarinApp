@@ -40,7 +40,6 @@ namespace XamarinApp.Droid
             StrictMode.SetVmPolicy(builder.Build());
         }
        
-
         public void TirarFoto()
         {
             /*
